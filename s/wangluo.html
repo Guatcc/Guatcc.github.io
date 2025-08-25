@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月25日23时0分13秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月25日23时15分5秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
 
 <head>
@@ -91,7 +91,7 @@
   <footer>
     <p>&copy; 2025</p>
     <p><a href="https://guat.cc/">返回首页</a></p>
-	<p><a>生成时间 | 2025年8月25日23时0分13秒</a></p>
+	<p><a>生成时间 | 2025年8月25日23时15分5秒</a></p>
   </footer>
 
   <!-- JS -->
@@ -100,6 +100,9 @@
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", function () {
       const query = this.value.toLowerCase();
+		document.querySelectorAll(".card").forEach(card => {
+			card.classList.add("show");
+		});
       document.querySelectorAll(".card").forEach(card => {
         const text = card.innerText.toLowerCase();
         // 重置之前的高亮
