@@ -110,6 +110,7 @@ header h1 {
 .search-box {
   max-width: 250px; /* 默认PC端最大250px */
 }
+.highlight { background:rgba(0,250,154,1); font-weight:bold; border-radius: 5px; color: #bbb; }
 .input-group-text {
   border-radius: 50px 0 0 50px;
   padding: 0.375rem 0.75rem;
