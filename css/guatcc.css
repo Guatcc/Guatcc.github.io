@@ -53,6 +53,41 @@
       
     }
 
+        /* 返回首页按钮样式 */
+        .back-to-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* 初始隐藏 */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        /* 按钮悬停效果 */
+        .back-to-home-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 按钮显示状态 */
+        .back-to-home-btn.show {
+            display: flex;
+        }
+
 /* Header */
 header {
   background: rgba(33, 37, 41, 0.9);
@@ -121,7 +156,12 @@ body.dark .theme-toggle {
     width: 100%;
     margin-bottom: 0.5rem;
   }
-
+  .back-to-home-btn {
+      width: 50px;
+      height: 50px;
+      bottom: 20px;
+      right: 20px;
+  }
   .github, .theme-toggle {
     font-size: 1.4rem;
   }

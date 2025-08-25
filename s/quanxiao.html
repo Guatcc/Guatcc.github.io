@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 生成时间 | 2025年8月25日13时54分55秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月25日14时27分21秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
 
 <head>
@@ -51,10 +51,31 @@
 		</div>
 	</div>
 	</header>
-
+    <!-- 返回首页按钮 -->
+    <a href="http://guat.cc/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
+        <i class="bi bi-house" style="font-size: 24px;"></i>
+    </a>
+	    <script>
+        // 获取返回首页按钮元素
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        // 设置触发显示按钮的滚动距离（像素）
+        const scrollTrigger = 100;
+        // 监听页面滚动事件
+        window.addEventListener('scroll', function() {
+            // 获取当前滚动距离
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > scrollTrigger) {
+                backToHomeBtn.classList.add('show');
+            } else {
+                backToHomeBtn.classList.remove('show');
+            }
+        });
+    </script>
   <!-- 主体 -->
-  <main class="container" style="padding-top: 90px;"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：重要通知
-</h4><p class="card-text">答：1.专业群号在新生须知最后两页，没有加群的速度了。</p><p class="card-text">答：2.没有特殊原因尽量不要提前到校，13号有教师资格证考试，前后都要加强校园管理。</p><p class="card-text">答：3. 银行卡办理请参考新生须知第三部分收费须知（第五页）</p><p class="card-text">答：4. 关注学校公众号，了解迎新工作各项具体通知</p><p class="card-text">答：5. 关注本学院公众号，了解你未来的专业生活</p><p class="card-text">答：由于南北分校区和专业不同，以下内容仅供参考，可能不适用于您的校区和或者专业，不保证以下信息的真实性（因为这是聊天记录，这下不得不信了。</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍楼里面有没有电梯
+  <main class="container" style="padding-top: 90px;"><div class="card-container"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：重要通知
+</h4><p class="card-text">答：1.专业群号在新生须知最后两页，没有加群的速度了。</p><p class="card-text">答：2.没有特殊原因尽量不要提前到校，13号有教师资格证考试，前后都要加强校园管理。</p><p class="card-text">答：3. 银行卡办理请参考新生须知第三部分收费须知（第五页）</p><p class="card-text">答：4. 关注学校公众号，了解迎新工作各项具体通知</p><p class="card-text">答：5. 关注本学院公众号，了解你未来的专业生活</p><p class="card-text">答：由于南北分校区和专业不同，以下内容仅供参考，可能不适用于您的校区和或者专业，不保证以下信息的真实性（因为这是聊天记录，这下不得不信了。</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：刚开学会用到电脑不
+</h4><p class="card-text">答：暂时用不到 理工科的用到 要打代码而且要做ppt写实验报告论文这些用电脑比较方便而且有时候还需要转压缩包发老师可以国庆的时候买</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：拍证件照有什么需求吗
+</h4><p class="card-text">答：蓝底 跟高考证上面那样就差不多了 你可以备电子版的 需要的时候再打印 而且一般只用贴学生证的 报名四级要用 有电子版就随便换背景</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍楼里面有没有电梯
 </h4><p class="card-text">答：宿舍楼没有电梯 要走楼梯</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：共享单车能不能开出学校
 </h4><p class="card-text">答：可以出去 </p><p class="card-text">答： 可以</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：学校有卤味吗，想吃
 </h4><p class="card-text">答：有绝味鸭脖</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：我想问一下到时候开学了家长能开车进来的吗？ 这个指定位置是哪里啊？
@@ -154,7 +175,7 @@
   <footer>
     <p>&copy; 2025</p>
     <p><a href="https://guat.cc/">返回首页</a></p>
-	<p><a>生成时间 | 2025年8月25日13时54分55秒</a></p>
+	<p><a>生成时间 | 2025年8月25日14时27分21秒</a></p>
   </footer>
 
   <!-- JS -->

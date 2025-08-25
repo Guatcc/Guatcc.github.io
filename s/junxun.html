@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 生成时间 | 2025年8月25日13时54分55秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月25日14时27分21秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
 
 <head>
@@ -51,10 +51,28 @@
 		</div>
 	</div>
 	</header>
-
+    <!-- 返回首页按钮 -->
+    <a href="http://guat.cc/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
+        <i class="bi bi-house" style="font-size: 24px;"></i>
+    </a>
+	    <script>
+        // 获取返回首页按钮元素
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        // 设置触发显示按钮的滚动距离（像素）
+        const scrollTrigger = 100;
+        // 监听页面滚动事件
+        window.addEventListener('scroll', function() {
+            // 获取当前滚动距离
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > scrollTrigger) {
+                backToHomeBtn.classList.add('show');
+            } else {
+                backToHomeBtn.classList.remove('show');
+            }
+        });
+    </script>
   <!-- 主体 -->
-  <main class="container" style="padding-top: 90px;">军训 
-<div class="card p-4"><div class="card-body"><h4 class="card-title">问：什么时候军训，军训多久
+  <main class="container" style="padding-top: 90px;"><div class="card-container"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：什么时候军训，军训多久
 </h4><p class="card-text">答：9月17号到30号早上军训，训完放假国庆中秋</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：军训期间每个班会有大桶水吗？
 </h4><p class="card-text">答：可能自己买水</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：军训服是长袖还是短袖
 </h4><p class="card-text">答：衬衫是短袖，外套是长袖</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：军训期间必须在学校里吃饭吗？
@@ -77,7 +95,7 @@
   <footer>
     <p>&copy; 2025</p>
     <p><a href="https://guat.cc/">返回首页</a></p>
-	<p><a>生成时间 | 2025年8月25日13时54分55秒</a></p>
+	<p><a>生成时间 | 2025年8月25日14时27分21秒</a></p>
   </footer>
 
   <!-- JS -->

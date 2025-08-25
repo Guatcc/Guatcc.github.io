@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 生成时间 | 2025年8月25日13时54分55秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月25日14时27分21秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
 
 <head>
@@ -51,9 +51,28 @@
 		</div>
 	</div>
 	</header>
-
+    <!-- 返回首页按钮 -->
+    <a href="http://guat.cc/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
+        <i class="bi bi-house" style="font-size: 24px;"></i>
+    </a>
+	    <script>
+        // 获取返回首页按钮元素
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        // 设置触发显示按钮的滚动距离（像素）
+        const scrollTrigger = 100;
+        // 监听页面滚动事件
+        window.addEventListener('scroll', function() {
+            // 获取当前滚动距离
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > scrollTrigger) {
+                backToHomeBtn.classList.add('show');
+            } else {
+                backToHomeBtn.classList.remove('show');
+            }
+        });
+    </script>
   <!-- 主体 -->
-  <main class="container" style="padding-top: 90px;"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍限电吗，我电脑怕限电用不了
+  <main class="container" style="padding-top: 90px;"><div class="card-container"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍限电吗，我电脑怕限电用不了
 </h4><p class="card-text">答：不限（不断电），你有钱可以一直开，电费自己出 可以带台式机 </p><p class="card-text">答： </p><button class="btn" onclick="window.location.href='https://www.bilibili.com/video/BV1JzAPeCEYW'">B站【一个视频让你搞懂“宿舍限电”】 </button></p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：可以带吹风机吗？学校有公共吹风机吗？学生会的会不会去宿舍检查吹风机的功率大小？
 </h4><p class="card-text">答：可以带额定功率1500W以内的，没有，不会</p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍限电吗，会不会有人通宵达瓦
 </h4><p class="card-text">答：不限（不断电），但是会断网 </p><button class="btn" onclick="window.location.href='./wangluo.html'">传送到网络篇</button></p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：限电（功率）多少？
@@ -68,7 +87,7 @@
   <footer>
     <p>&copy; 2025</p>
     <p><a href="https://guat.cc/">返回首页</a></p>
-	<p><a>生成时间 | 2025年8月25日13时54分55秒</a></p>
+	<p><a>生成时间 | 2025年8月25日14时27分21秒</a></p>
   </footer>
 
   <!-- JS -->

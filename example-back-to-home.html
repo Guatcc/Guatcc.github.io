@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回首页按钮示例</title>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        /* 页面基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 返回首页按钮样式 */
+        .back-to-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* 初始隐藏 */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        /* 按钮悬停效果 */
+        .back-to-home-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 按钮显示状态 */
+        .back-to-home-btn.show {
+            display: flex;
+        }
+
+        /* 页面内容样式（用于演示滚动效果） */
+        .content {
+            padding: 20px;
+            min-height: 200vh; /* 确保页面有足够高度可以滚动 */
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .section {
+            padding: 40px 20px;
+            margin: 20px 0;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .back-to-home-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <div class="header">
+        <h1>返回首页按钮演示</h1>
+        <p>向下滚动页面，查看右下角的返回首页按钮</p>
+    </div>
+
+    <!-- 页面主要内容 -->
+    <div class="content">
+        <div class="section">
+            <h2>第一部分</h2>
+            <p>这是页面的第一部分内容。继续向下滚动，当页面滚动一定距离后，右下角会出现一个返回首页的圆形按钮。</p>
+            <p>这个按钮使用了Bootstrap Icons中的房子图标（bi-house），具有悬停效果和平滑的动画过渡。</p>
+        </div>
+
+        <div class="section">
+            <h2>第二部分</h2>
+            <p>当你看到右下角的蓝色圆形按钮时，点击它就可以返回到首页。</p>
+            <p>按钮具有以下特性：</p>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li>在页面滚动后自动显示</li>
+                <li>圆形设计，美观大方</li>
+                <li>悬停时有颜色变化和轻微上浮效果</li>
+                <li>响应式设计，在移动设备上自适应</li>
+                <li>使用Bootstrap Icons图标库</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>第三部分</h2>
+            <p>继续滚动测试按钮的显示效果...</p>
+            <p>按钮会在页面开始滚动后显示在固定位置，方便用户随时返回首页。</p>
+        </div>
+
+        <!-- 更多内容用于演示滚动 -->
+        <div class="section">
+            <h2>更多内容</h2>
+            <p>这里是一些额外的内容，用于确保页面有足够的滚动空间。</p>
+            <p>你可以根据需要调整按钮显示的触发条件（比如滚动的距离）。</p>
+        </div>
+    </div>
+
+    <!-- 返回首页按钮 -->
+    <a href="/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
+        <i class="bi bi-house" style="font-size: 24px;"></i>
+    </a>
+
+    <script>
+        // 获取返回首页按钮元素
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        
+        // 设置触发显示按钮的滚动距离（像素）
+        const scrollTrigger = 100;
+
+        // 监听页面滚动事件
+        window.addEventListener('scroll', function() {
+            // 获取当前滚动距离
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // 如果滚动距离超过触发值，显示按钮；否则隐藏按钮
+            if (scrollTop > scrollTrigger) {
+                backToHomeBtn.classList.add('show');
+            } else {
+                backToHomeBtn.classList.remove('show');
+            }
+        });
+
+        // 为按钮添加点击事件（可选：如果需要特殊处理）
+        backToHomeBtn.addEventListener('click', function(e) {
+            // 如果首页链接不是 "/"，可以在这里添加特殊逻辑
+            // 例如：添加确认对话框、统计点击等
+            
+            console.log('返回首页按钮被点击');
+            // 默认行为是跳转到 href 属性指定的地址（这里是 "/"）
+        });
+
+        // 可选：平滑滚动到首页的功能
+        // 如果你想让返回首页的跳转更平滑，可以修改链接或添加 JavaScript 跳转
+        // 例如：将 href 改为 "javascript:smoothScrollToHome()" 并添加相应函数
+    </script>
+</body>
+</html>
