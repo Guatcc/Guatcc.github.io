@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月26日0时2分10秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月27日1时24分54秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,34 +24,31 @@
 </head>
 
 <body>
+
   <div id="particles-js"></div>
 
 	<header class="text-white py-2 fixed-top">
 	<div class="container d-flex flex-wrap justify-content-between align-items-center">
-	
-		<!-- 左侧：标题 + 导航 -->
-		<div class="d-flex align-items-center mb-2 mb-lg-0">
+
+		<!-- 左侧：标题 -->
+<div class="d-flex align-items-center mb-2 mb-lg-0">
 		<h1 class="m-0 animate__animated animate__fadeInDown">桂航快速解答 - 首页</h1>
 		</div>
-	
-		<!-- 右侧：搜索框 + GitHub + 主题切换 -->
-		<div class="d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-end">
+<div class="d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-end">
 		<div class="input-group me-2" style="max-width: 250px;">
 		<span class="input-group-text bg-white border-0">
 			<i class="bi bi-search"></i>
 		</span>
-		<input type="text" id="searchInput" 
-			class="form-control rounded-pill border-0 shadow-sm" 
-			placeholder="搜索内容...">
+		<input type="text" id="searchInput" class="form-control rounded-pill border-0 shadow-sm" placeholder="搜索内容...">
 		</div>
 
 		<a class="bi bi-github github me-3" style="padding-left: 10px;" id="github" href="https://github.com/Guatcc/Guatcc.github.io"></a>
-		<i class="bi bi-moon-fill theme-toggle" style="padding-left: 10px;" id="themeToggle"></i>
+		<i class="bi theme-toggle bi-sun-fill" style="padding-left: 10px;" id="themeToggle"></i>
 		</div>
 	</div>
 	</header>
     <!-- 返回首页按钮 -->
-    <a href="http://guat.cc/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
+    <a href="https://guat.cc/" class="back-to-home-btn" id="backToHomeBtn" title="返回首页">
         <i class="bi bi-house" style="font-size: 24px;"></i>
     </a>
 	    <script>
@@ -71,8 +67,10 @@
             }
         });
     </script>
+    </a>
   <!-- 主体 -->
-  <main class="container" style="padding-top: 90px;"><div class="card-container"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：这是一个什么网站？
+  <main class="container" style="padding-top: 90px;">
+    <div class="card-container"><div class="card p-4"><div class="card-body"><h4 class="card-title">问：这是一个什么网站？
 </h4><p class="card-text">这是桂林航天工业学院新生自己做的快速解答网站，数据来源于QQ群聊天记录，你可以在本站快速找到你可能会问到的问题，以便快速得到答案。</div></div></p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：所有问题
 </h4><p class="card-text">汇总整理放在这里啦</p><button class="btn" onclick="window.location.href='./s/quanxiao.html'">立即传送</button></div></div></p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：文件共享
 </h4><p class="card-text">这里有你可能需要的文件</p><button class="btn" onclick="window.location.href='./s/wenjiangongxiang.html'">立即传送</button></div></div></p></div></div><div class="card p-4"><div class="card-body"><h4 class="card-title">问：宿舍篇
@@ -82,30 +80,27 @@
 </h4><p class="card-text">有待完善 正在施工肿...</p><button class="btn" onclick="window.location.href='./s/dianqi.html'">立即传送</button></div></div></p></div></div>
     </div>
   </main>
-
+<div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">×</span>
+        <img class="modal-content" id="modalImage">
+    </div>
   <!-- 页尾 -->
   <footer>
     <p>&copy; 2025</p>
-    <p><a href="https://guat.cc/">返回首页</a></p>
-	<p><a>生成时间 | 2025年8月26日0时2分10秒</a></p>
+    <p><a href="https://guat.cc/">GUAT.CC</a></p>
+	<p><a>生成时间 | 2025年8月27日1时24分54秒</a></p>
   </footer>
 
   <!-- JS -->
 <script>
-    // 搜索 + 高亮
+    // ?? 搜索 + 高亮
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", function () {
       const query = this.value.toLowerCase();
-		document.querySelectorAll(".card").forEach(card => {
-			card.classList.add("show");
-		});
       document.querySelectorAll(".card").forEach(card => {
         const text = card.innerText.toLowerCase();
         // 重置之前的高亮
         card.querySelectorAll(".card-text").forEach(p => {
-          p.innerHTML = p.innerText;
-        });
-        card.querySelectorAll(".card-title").forEach(p => {
           p.innerHTML = p.innerText;
         });
         if (text.includes(query) || query === "") {
@@ -203,6 +198,31 @@
 
     // 页面加载时初始化主题
     initTheme();
+
+
+        // 图片放大功能
+        function openModal(img) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    
   </script>
 </body>
 </html>
