@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月27日1时24分54秒 -->
+  <!-- 一键生成网页 by LYH 生成时间 | 2025年8月27日14时13分37秒 -->
   <!-- 页面内容来源于QQ群 如有侵权可联系删除 -->
 <head>
   <meta charset="UTF-8">
@@ -88,7 +88,7 @@
   <footer>
     <p>&copy; 2025</p>
     <p><a href="https://guat.cc/">GUAT.CC</a></p>
-	<p><a>生成时间 | 2025年8月27日1时24分54秒</a></p>
+	<p><a>生成时间 | 2025年8月27日14时13分37秒</a></p>
   </footer>
 
   <!-- JS -->
@@ -123,6 +123,118 @@
 </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<script>
+/* ------- 工具函数 ------- */
+function escapeRegExp(str){ return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+let activeTopic = null; // 当前激活的话题（用于切换高亮状态）
+
+/* ------- 从正文中抽取 #话题#，生成徽章，并移除正文里的 #话题# ------- */
+function extractTopics(){
+  document.querySelectorAll(".card").forEach(card=>{
+    const body = card.querySelector(".card-body");
+    if(!body) return;
+
+    const found = new Set();
+
+    // 遍历 card-body 内的“叶子”节点（避免破坏已有 HTML 结构）
+    body.querySelectorAll("*").forEach(el=>{
+      if(el.children.length === 0){
+        const original = el.textContent;
+        const matches = [...original.matchAll(/#([^#\s][^#]*)#/g)].map(m=>m[1].trim());
+        matches.forEach(t=> t && found.add(t));
+        if(matches.length){
+          // 移除正文中的 #话题#
+          el.textContent = original.replace(/#([^#\s][^#]*)#/g, "").replace(/\s{2,}/g," ").trim();
+        }
+      }
+    });
+
+    if(found.size){
+      // 记录到 data-topics，供搜索匹配
+      card.dataset.topics = [...found].join(",");
+
+      // 创建容器与徽章
+      const wrap = document.createElement("div");
+      wrap.className = "card-topics";
+
+      [...found].forEach(topic=>{
+        const lower = topic.toLowerCase();
+        const badge = document.createElement("button");
+        badge.type = "button";
+        badge.className = "card-topic";
+        badge.dataset.topic = lower;
+        badge.textContent = `#${topic}#`;
+
+        // 点击徽章：切换筛选
+        badge.addEventListener("click", ()=>{
+          const searchInput = document.getElementById("searchInput");
+          if(activeTopic === lower){
+            // 再次点击同一话题 => 清空筛选
+            activeTopic = null;
+            searchInput.value = "";
+          }else{
+            // 切换到该话题
+            activeTopic = lower;
+            searchInput.value = topic; // 显示原始大小写
+          }
+          applySearch();
+          updateBadgeActive();
+        });
+
+        wrap.appendChild(badge);
+      });
+
+      card.classList.add("has-topics");
+      card.appendChild(wrap);
+    }
+  });
+}
+
+/* ------- 搜索（包含高亮 & 话题匹配 & 显示/隐藏） ------- */
+function applySearch(){
+  const q = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
+  document.querySelectorAll(".card").forEach(card=>{
+    // 内容高亮（只对 .card-text）
+    card.querySelectorAll(".card-text").forEach(p=>{
+      const raw = p.textContent; // 纯文本（不包含已删除的 #话题#）
+      if(q){
+        p.innerHTML = raw.replace(new RegExp(`(${escapeRegExp(q)})`, "gi"), '<span class="highlight">$1</span>');
+      }else{
+        p.textContent = raw;
+      }
+    });
+
+    // 匹配：正文文本 + 话题（data-topics）
+    const hay = (card.textContent || "").toLowerCase();
+    const topics = (card.dataset.topics || "").toLowerCase();
+    const match = !q || hay.includes(q) || topics.includes(q);
+    card.style.display = match ? "" : "none";
+  });
+}
+
+/* ------- 更新徽章激活样式 ------- */
+function updateBadgeActive(){
+  document.querySelectorAll(".card-topic").forEach(b=>{
+    b.classList.toggle("active", !!activeTopic && b.dataset.topic === activeTopic);
+  });
+}
+
+/* ------- 绑定搜索框输入事件（与话题点击互斥） ------- */
+document.getElementById("searchInput")?.addEventListener("input", ()=>{
+  const q = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+  // 手动输入与话题不一致时，取消徽章激活
+  if(!q || q !== activeTopic){ activeTopic = null; }
+  applySearch();
+  updateBadgeActive();
+});
+
+/* ------- 初始化 ------- */
+extractTopics();
+applySearch();
+updateBadgeActive();
+</script>
+
   <script>
 	// 页面加载时立即检查并展示可见的卡片
 	function checkCards() {
@@ -198,6 +310,8 @@
 
     // 页面加载时初始化主题
     initTheme();
+
+
 
 
         // 图片放大功能

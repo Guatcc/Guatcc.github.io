@@ -238,6 +238,43 @@ body.dark .theme-toggle {
 	  padding: 10px 5px;
       transform: translateY(40px);
     }
+/* 话题容器：在卡片底部，支持换行，不重叠 */
+.card-topics{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-start;
+  pointer-events:auto;
+}
+
+/* 卡片正文底部留出空间，避免被话题挡住 */
+.card .card-body{ padding-bottom:56px; }
+.card.has-topics .card-body{ padding-bottom:60px; }
+
+/* 单个话题徽章（不再绝对定位） */
+.card-topic{
+  border:0;
+  outline:0;
+  position:static;
+  background:#0dcaf0;
+  color:#fff;
+  font-size:.75rem;
+  line-height:1;
+  padding:6px 10px;
+  border-radius:999px;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+  transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.card-topic:hover{ transform:translateY(-1px); }
+.card-topic.active{ box-shadow:0 0 0 2px rgba(13,202,240,.35); filter:saturate(1.2); }
+
+body.dark .card-topic{ background:#ffc107; color:#212529; }
+.card-topic:focus-visible{ box-shadow:0 0 0 3px rgba(13,110,253,.35); }
 
     .card.show {
       opacity: 1;
