@@ -6,297 +6,251 @@
     <title>MobileCopilot - 手机副驾驶</title>
     <style>
         :root {
-            --primary-blue: #00a3ff;
-            --bg-dark: #0b0e14;
-            --card-bg: #161b22;
-            --text-main: #e6edf3;
-            --text-dim: #8b949e;
-            --transition-speed: 0.6s;
+            --apple-bg: #000000;
+            --apple-text: #f5f5f7;
+            --apple-blue: #2997ff;
+            --apple-gray: #86868b;
+            --glass-bg: rgba(22, 22, 23, 0.8);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC","SF Pro Display","PingFang SC", sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow: hidden; /* 禁用原生滚动，交由控制逻辑 */
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            line-height: 1.5;
+            overflow-x: hidden;
         }
 
-        /* 幻灯片容器 */
-        .presentation {
+        /* 滚动吸附容器 */
+        .container {
             height: 100vh;
-            width: 100vw;
-            position: relative;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
         }
 
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
+        section {
+            height: 100vh;
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(20px);
+            padding: 0 10%;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
         }
 
-        .slide.active {
+        /* 动画基类 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
             opacity: 1;
-            visibility: visible;
             transform: translateY(0);
         }
 
-        /* 标题样式 */
-        h1 { font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px; }
-        h2 { font-size: 2rem; margin-bottom: 30px; border-left: 5px solid var(--primary-blue); padding-left: 15px; }
-        p { line-height: 1.6; color: var(--text-dim); max-width: 800px; text-align: center; }
-
-        /* 内容布局 */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        /* 导航条 */
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 1000px;
-            margin-top: 30px;
+            height: 44px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
         }
 
-        .card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
+        nav a { color: var(--apple-text); text-decoration: none; font-size: 12px; margin: 0 20px; opacity: 0.8; }
+
+        /* 首页 Hero */
+        .hero-h1 { font-size: 56px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 10px; }
+        .hero-h2 { font-size: 28px; color: var(--apple-blue); margin-bottom: 20px; }
+        .hero-desc { font-size: 21px; color: var(--apple-gray); max-width: 600px; text-align: center; }
+
+        /* 网格布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: #1d1d1f;
+            border-radius: 20px;
+            padding: 40px;
             transition: transform 0.3s ease;
         }
 
-        .card:hover { transform: translateY(-5px); border-color: var(--primary-blue); }
+        .feature-card:hover { transform: scale(1.02); }
 
-        .card h3 { color: var(--primary-blue); margin-bottom: 10px; }
+        .feature-card h3 { font-size: 24px; margin-bottom: 15px; }
+        .feature-card p { color: var(--apple-gray); font-size: 17px; }
 
-        /* 底部导航 */
-        .controls {
+        /* 数据展示 */
+        .stat-box { text-align: center; }
+        .stat-number { font-size: 80px; font-weight: 600; color: var(--apple-blue); }
+
+        /* 进度点 */
+        .nav-dots {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
+            flex-direction: column;
             gap: 15px;
             z-index: 100;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
-            background: #30363d;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
             border-radius: 50%;
             cursor: pointer;
-            transition: background 0.3s;
         }
 
-        .dot.active { background: var(--primary-blue); box-shadow: 0 0 10px var(--primary-blue); }
+        .dot.active { background: white; transform: scale(1.5); }
 
-        /* 进度条 */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: var(--primary-blue);
-            z-index: 101;
-            transition: width 0.3s;
-        }
-
-        /* 首页装饰 */
-        .hero-img {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px var(--primary-blue));
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background: rgba(0, 163, 255, 0.1);
-            color: var(--primary-blue);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
 
-    <div class="progress-bar" id="progressBar"></div>
+    <nav>
+        <a href="#">MobileCopilot</a>
+        <a href="#">技术</a>
+        <a href="#">安全</a>
+        <a href="#">规划</a>
+    </nav>
 
-    <div class="presentation" id="presentation">
+    <div class="nav-dots" id="dots"></div>
+
+    <div class="container" id="mainScroll">
         
-        <section class="slide active">
-            <div class="badge">ONE PLUS TEAM PRODUCTION</div>
-            <h1>MobileCopilot</h1>
-            <h2>通用手机AI Agent · 手机副驾驶</h2>
-            <p>让每台手机都拥有AI超能力 | 跨品牌通用 · 系统级能力 · 安全可控</p>
-            <div style="margin-top: 40px; font-size: 0.8rem; color: var(--text-dim);">mc.guat.cc</div>
+        <section>
+            <div class="reveal active">
+                <p style="color: var(--apple-blue); font-weight: 600; margin-bottom: 10px;">ONE PLUS TEAM</p>
+                <h1 class="hero-h1">MobileCopilot</h1>
+                <h2 class="hero-h2">手机副驾驶</h2>
+                <p class="hero-desc">跨品牌通用 · 系统级能力 · 隐私至上</p>
+            </div>
         </section>
 
-        <section class="slide">
-            <h2>01 项目概述</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>痛点分析</h3>
-                    <p>平均安装56个APP，每天切换200+次。广告繁多，比价耗时15分钟以上。</p>
+        <section>
+            <h2 class="hero-h1 reveal">重新定义人机交互</h2>
+            <div class="grid reveal">
+                <div class="feature-card">
+                    <h3>消除 APP 孤岛</h3>
+                    <p>用户平均安装56个应用，切换频繁。我们通过 GUI Agent 技术打破壁垒。</p>
                 </div>
-                <div class="card">
-                    <h3>核心概念</h3>
-                    <p>基于 GUI Agent 技术，通过自然语言指令操作页面点击，跨APP完成复杂任务。</p>
+                <div class="feature-card">
+                    <h3>跨应用协作</h3>
+                    <p>无需 API，基于 VLM 视觉驱动。像人类一样理解屏幕，执行任务。</p>
                 </div>
             </div>
         </section>
 
-        <section class="slide">
-            <h2>03 核心场景</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>一句话订机票</h3>
-                    <p>"帮我订下午6点后飞南京的最低票价"，自动比价、选座、填单。</p>
+        <section>
+            <div class="stat-box reveal">
+                <h2 style="font-size: 24px; margin-bottom: 20px;">中国 AI Agent 市场</h2>
+                <div class="stat-number">77%</div>
+                <p style="font-size: 21px; color: var(--apple-gray);">年复合增长率 (2025-2030)</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="hero-h1 reveal">技术突破</h2>
+            <div class="grid reveal">
+                <div class="feature-card">
+                    <h3>端云协同推理</h3>
+                    <p>端侧轻量级模型保证零延迟响应，云端 Qwen-VL 负责复杂逻辑决策。</p>
                 </div>
-                <div class="card">
-                    <h3>智能比价</h3>
-                    <p>在淘宝、京东、拼多多间自动搜索，推荐最优选择。</p>
-                </div>
-                <div class="card">
-                    <h3>信息整合</h3>
-                    <p>从微信、邮件提取关键内容，自动生成日报、周报。</p>
+                <div class="feature-card">
+                    <h3>精准元素定位</h3>
+                    <p>按键级定位精度，支持动态分辨率适配，界面更新自动感知。</p>
                 </div>
             </div>
         </section>
 
-        <section class="slide">
-            <h2>04 技术创新</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>VLM视觉驱动</h3>
-                    <p>采用 Qwen-VL 模型理解屏幕截图，无需依赖APP开放接口，具备强通用性。</p>
-                </div>
-                <div class="card">
-                    <h3>端云协同</h3>
-                    <p>端侧轻量级模型保证响应速度，云端大模型负责复杂逻辑推理。</p>
-                </div>
+        <section style="background-color: #000;">
+            <h2 class="hero-h1 reveal" style="color: var(--apple-blue);">隐私，由你掌控</h2>
+            <p class="hero-desc reveal">厂商不可见，数据本地脱敏。敏感操作二次确认，操作日志全追溯。</p>
+            <div class="reveal" style="margin-top: 40px; font-size: 14px; color: var(--apple-gray);">
+                支持：端侧 TEE 可信执行环境 | 全链路加密
             </div>
         </section>
 
-        <section class="slide">
-            <h2>06 商业模式</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>C端：免费增值</h3>
-                    <p>基础功能免费，深度定制与高频调用按 Tokens 计费（随用随充）。</p>
-                </div>
-                <div class="card">
-                    <h3>B端：授权服务</h3>
-                    <p>企业级自动化流程替代（RPA），OEM预装合作与API授权。</p>
-                </div>
+        <section>
+            <h1 class="reveal">永不妥协 绝不将就</h1>
+            <p class="reveal" style="margin-top: 20px;">雷宇航 · 何斌 · 赖鑫涛 · 唐锦艺 · 梁宝煜 · 游祥文</p>
+            <div class="reveal" style="margin-top: 50px; opacity: 0.5;">
+                © 2026 MobileCopilot 一加队. mc.guat.cc
             </div>
-        </section>
-
-        <section class="slide">
-            <h2>07 安全体系</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>隐私隔离</h3>
-                    <p>“厂商不可见、用户可掌控”。敏感数据本地脱敏，端到端全链路加密。</p>
-                </div>
-                <div class="card">
-                    <h3>二次确认</h3>
-                    <p>支付、授权等敏感操作必须由用户手动二次确认，操作日志全追溯。</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <h2>08 发展规划</h2>
-            <div class="content-grid">
-                <div class="card">
-                    <h3>第一阶段 (0-6m)</h3>
-                    <p>核心开发与MVP验证，目标任务成功率 > 75%。</p>
-                </div>
-                <div class="card">
-                    <h3>第三阶段 (18-36m)</h3>
-                    <p>开放开发者平台与插件市场，构建AI Agent新生态。</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide">
-            <h1>共创 AI Agent 新纪元</h1>
-            <p>MobileCopilot 一加队：永不妥协 绝不将就</p>
-            <div style="margin-top: 30px; text-align: center; color: var(--primary-blue);">
-                雷某 · 何某 · 赖某 · 唐某 · 梁某 · 游某
-            </div>
-            <p style="margin-top: 20px; font-size: 0.8rem;">© 2026 MobileCopilot. Made with ❤️ by 一加队</p>
         </section>
 
     </div>
 
-    <div class="controls" id="dotsContainer"></div>
-
     <script>
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dotsContainer');
-        const progressBar = document.getElementById('progressBar');
-        let currentSlide = 0;
-
-        // 初始化导航点
-        slides.forEach((_, i) => {
+        // 自动生成导航点
+        const sections = document.querySelectorAll('section');
+        const dotsContainer = document.getElementById('dots');
+        
+        sections.forEach((_, i) => {
             const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
+            dot.className = 'dot';
+            dot.addEventListener('click', () => {
+                sections[i].scrollIntoView({ behavior: 'smooth' });
+            });
             dotsContainer.appendChild(dot);
         });
 
-        const dots = document.querySelectorAll('.dot');
+        // Intersection Observer 实现滚动淡入
+        const observerOptions = {
+            threshold: 0.3
+        };
 
-        function updateUI() {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === currentSlide);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.reveal').forEach(el => {
+                        el.classList.add('active');
+                    });
+                    
+                    // 更新导航点
+                    const index = Array.from(sections).indexOf(entry.target);
+                    document.querySelectorAll('.dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
             });
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
-        }
+        }, observerOptions);
 
-        function goToSlide(n) {
-            currentSlide = (n + slides.length) % slides.length;
-            updateUI();
-        }
+        sections.forEach(section => observer.observe(section));
 
-        // 键盘监听
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') goToSlide(currentSlide + 1);
-            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-        });
-
-        // 滚轮监听 (可选)
-        let lastTime = 0;
-        document.addEventListener('wheel', (e) => {
-            const now = new Date().getTime();
-            if (now - lastTime < 1000) return; // 节流
-            if (e.deltaY > 0) goToSlide(currentSlide + 1);
-            else goToSlide(currentSlide - 1);
-            lastTime = now;
+        // 简单的视差位移效果
+        document.getElementById('mainScroll').addEventListener('scroll', () => {
+            const scrolled = document.getElementById('mainScroll').scrollTop;
+            // 可在此处添加更复杂的视差逻辑
         });
     </script>
 </body>
