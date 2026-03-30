@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileCopilot - 手机副驾驶</title>
+    <style>
+        :root {
+            --primary-blue: #00a3ff;
+            --bg-dark: #0b0e14;
+            --card-bg: #161b22;
+            --text-main: #e6edf3;
+            --text-dim: #8b949e;
+            --transition-speed: 0.6s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden; /* 禁用原生滚动，交由控制逻辑 */
+        }
+
+        /* 幻灯片容器 */
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* 标题样式 */
+        h1 { font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px; }
+        h2 { font-size: 2rem; margin-bottom: 30px; border-left: 5px solid var(--primary-blue); padding-left: 15px; }
+        p { line-height: 1.6; color: var(--text-dim); max-width: 800px; text-align: center; }
+
+        /* 内容布局 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--primary-blue); }
+
+        .card h3 { color: var(--primary-blue); margin-bottom: 10px; }
+
+        /* 底部导航 */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #30363d;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active { background: var(--primary-blue); box-shadow: 0 0 10px var(--primary-blue); }
+
+        /* 进度条 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary-blue);
+            z-index: 101;
+            transition: width 0.3s;
+        }
+
+        /* 首页装饰 */
+        .hero-img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px var(--primary-blue));
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(0, 163, 255, 0.1);
+            color: var(--primary-blue);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="presentation" id="presentation">
+        
+        <section class="slide active">
+            <div class="badge">ONE PLUS TEAM PRODUCTION</div>
+            <h1>MobileCopilot</h1>
+            <h2>通用手机AI Agent · 手机副驾驶</h2>
+            <p>让每台手机都拥有AI超能力 | 跨品牌通用 · 系统级能力 · 安全可控</p>
+            <div style="margin-top: 40px; font-size: 0.8rem; color: var(--text-dim);">mc.guat.cc</div>
+        </section>
+
+        <section class="slide">
+            <h2>01 项目概述</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>痛点分析</h3>
+                    <p>平均安装56个APP，每天切换200+次。广告繁多，比价耗时15分钟以上。</p>
+                </div>
+                <div class="card">
+                    <h3>核心概念</h3>
+                    <p>基于 GUI Agent 技术，通过自然语言指令操作页面点击，跨APP完成复杂任务。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>03 核心场景</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>一句话订机票</h3>
+                    <p>"帮我订下午6点后飞南京的最低票价"，自动比价、选座、填单。</p>
+                </div>
+                <div class="card">
+                    <h3>智能比价</h3>
+                    <p>在淘宝、京东、拼多多间自动搜索，推荐最优选择。</p>
+                </div>
+                <div class="card">
+                    <h3>信息整合</h3>
+                    <p>从微信、邮件提取关键内容，自动生成日报、周报。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>04 技术创新</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>VLM视觉驱动</h3>
+                    <p>采用 Qwen-VL 模型理解屏幕截图，无需依赖APP开放接口，具备强通用性。</p>
+                </div>
+                <div class="card">
+                    <h3>端云协同</h3>
+                    <p>端侧轻量级模型保证响应速度，云端大模型负责复杂逻辑推理。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>06 商业模式</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>C端：免费增值</h3>
+                    <p>基础功能免费，深度定制与高频调用按 Tokens 计费（随用随充）。</p>
+                </div>
+                <div class="card">
+                    <h3>B端：授权服务</h3>
+                    <p>企业级自动化流程替代（RPA），OEM预装合作与API授权。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>07 安全体系</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>隐私隔离</h3>
+                    <p>“厂商不可见、用户可掌控”。敏感数据本地脱敏，端到端全链路加密。</p>
+                </div>
+                <div class="card">
+                    <h3>二次确认</h3>
+                    <p>支付、授权等敏感操作必须由用户手动二次确认，操作日志全追溯。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h2>08 发展规划</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>第一阶段 (0-6m)</h3>
+                    <p>核心开发与MVP验证，目标任务成功率 > 75%。</p>
+                </div>
+                <div class="card">
+                    <h3>第三阶段 (18-36m)</h3>
+                    <p>开放开发者平台与插件市场，构建AI Agent新生态。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <h1>共创 AI Agent 新纪元</h1>
+            <p>MobileCopilot 一加队：永不妥协 绝不将就</p>
+            <div style="margin-top: 30px; text-align: center; color: var(--primary-blue);">
+                雷某 · 何某 · 赖某 · 唐某 · 梁某 · 游某
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem;">© 2026 MobileCopilot. Made with ❤️ by 一加队</p>
+        </section>
+
+    </div>
+
+    <div class="controls" id="dotsContainer"></div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const progressBar = document.getElementById('progressBar');
+        let currentSlide = 0;
+
+        // 初始化导航点
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateUI() {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentSlide);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+        }
+
+        function goToSlide(n) {
+            currentSlide = (n + slides.length) % slides.length;
+            updateUI();
+        }
+
+        // 键盘监听
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') goToSlide(currentSlide + 1);
+            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        });
+
+        // 滚轮监听 (可选)
+        let lastTime = 0;
+        document.addEventListener('wheel', (e) => {
+            const now = new Date().getTime();
+            if (now - lastTime < 1000) return; // 节流
+            if (e.deltaY > 0) goToSlide(currentSlide + 1);
+            else goToSlide(currentSlide - 1);
+            lastTime = now;
+        });
+    </script>
+</body>
+</html>
