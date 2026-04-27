@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "threads": [
+    {
+      "id": "t_7907ee15d3f1497082",
+      "title": "111",
+      "body": "你好",
+      "author": "111",
+      "tags": [
+        "全校"
+      ],
+      "pinned": false,
+      "locked": false,
+      "deleted": false,
+      "createdAt": "2026-04-22T07:24:48.599Z",
+      "updatedAt": "2026-04-22T07:24:48.599Z",
+      "replies": []
+    },
+    {
+      "id": "t_6fb0bbc33bc7473887",
+      "title": "111",
+      "body": "1",
+      "author": "111",
+      "tags": [
+        "111"
+      ],
+      "pinned": false,
+      "locked": false,
+      "deleted": false,
+      "createdAt": "2026-04-22T07:37:02.582Z",
+      "updatedAt": "2026-04-22T07:37:02.582Z",
+      "replies": []
+    }
+  ]
+}

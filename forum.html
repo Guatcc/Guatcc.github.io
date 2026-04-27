@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GUAT.CC 校园论坛，使用 WebSocket 后端提供实时帖子和回复。">
+  <title>校园论坛 | GUAT.CC</title>
+  <link rel="stylesheet" href="css/guatcc.css">
+</head>
+<body data-page="forum">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="GUAT.CC 首页">
+      <span class="brand-mark">
+        <img src="logo-mark.png" alt="GUAT.CC logo">
+      </span>
+      <span><strong>GUAT.CC</strong><small>桂航快速解答</small></span>
+    </a>
+    <nav class="site-nav" aria-label="栏目导航">
+      <a href="index.html">首页</a><a href="s/quanxiao.html">全校</a><a href="s/wenjiangongxiang.html">文件</a><a href="s/sushe.html">宿舍</a><a href="s/junxun.html">军训</a><a href="s/wangluo.html">网络</a><a href="s/dianqi.html">电器</a><a class="forum-entry" href="forum.html" aria-current="page" hidden>论坛</a>
+    </nav>
+    <div class="header-tools">
+      <a class="secondary-link admin-shortcut" href="admin/forum.html">后台</a>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <span class="theme-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7 1.4-1.4M4.9 19.1l1.4-1.4m11.4 0 1.4 1.4M4.9 4.9l1.4 1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg></span>
+        <span class="theme-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 14.7A8.5 8.5 0 0 1 9.3 3.7 8.5 8.5 0 1 0 20.3 14.7Z"/></svg></span>
+      </button>
+      <a class="icon-button" href="https://github.com/Guatcc/Guatcc.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.9c.6.1.8-.2.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    </div>
+  </header>
+
+  <main class="forum-shell">
+    <section class="forum-hero">
+      <div>
+        <p class="eyebrow">WebSocket 实时模式</p>
+        <h1>校园论坛</h1>
+        <p class="lede">后端在线时显示帖子、发帖和回复；后端不可达时，论坛入口会从主站隐藏。</p>
+      </div>
+      <div class="forum-side">
+        <div class="forum-status" id="forumStatus" data-state="connecting">
+          <strong>正在连接论坛后端</strong>
+          <span>ws.guat.cc:31679</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="forum-offline" id="forumOffline" hidden>
+      <h2>论坛后端暂未连接</h2>
+      <p>当前没有显示论坛数据。请确认 WebSocket 服务已经在 <code>ws.guat.cc:31679</code> 启动，并且 HTTPS 页面可以使用 <code>wss://</code> 访问。</p>
+    </section>
+
+    <section class="forum-layout" id="forumApp" hidden>
+      <aside class="forum-compose">
+        <h2>发起讨论</h2>
+        <form id="threadForm">
+          <label>昵称<input name="author" maxlength="24" placeholder="匿名同学"></label>
+          <label>标题<input name="title" maxlength="80" required placeholder="想聊点什么？"></label>
+          <label>话题<input name="tags" maxlength="80" placeholder="报到, 宿舍, 课程"></label>
+          <label>正文<textarea name="body" maxlength="3000" required placeholder="补充背景、问题或经验"></textarea></label>
+          <button class="primary-link" type="submit">发布帖子</button>
+        </form>
+      </aside>
+
+      <section class="forum-main">
+        <div class="forum-toolbar">
+          <label class="search-box forum-search" aria-label="搜索论坛">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.7-4.7m2.2-5.3a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
+            <input id="forumSearch" type="search" placeholder="搜索帖子、正文或话题" autocomplete="off">
+          </label>
+          <button class="secondary-link" id="refreshForum" type="button">刷新</button>
+        </div>
+        <div class="thread-list" id="threadList"></div>
+        <article class="thread-detail" id="threadDetail" hidden></article>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/forum-ws.js" defer></script>
+  <script src="js/forum-client.js" defer></script>
+</body>
+</html>

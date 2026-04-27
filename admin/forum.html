@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GUAT.CC 校园论坛 WebSocket 后台。">
+  <title>论坛后台 | GUAT.CC</title>
+  <link rel="stylesheet" href="../css/guatcc.css">
+</head>
+<body data-page="forum-admin">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="GUAT.CC 首页">
+      <span class="brand-mark">
+        <img src="../logo-mark.png" alt="GUAT.CC logo">
+      </span>
+      <span><strong>GUAT.CC</strong><small>论坛后台</small></span>
+    </a>
+    <nav class="site-nav" aria-label="栏目导航">
+      <a href="../index.html">首页</a>
+      <a class="forum-entry" href="../forum.html" hidden>论坛</a>
+      <a href="../admin/forum.html" aria-current="page">后台</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <span class="theme-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7 1.4-1.4M4.9 19.1l1.4-1.4m11.4 0 1.4 1.4M4.9 4.9l1.4 1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg></span>
+        <span class="theme-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 14.7A8.5 8.5 0 0 1 9.3 3.7 8.5 8.5 0 1 0 20.3 14.7Z"/></svg></span>
+      </button>
+      <a class="icon-button" href="https://github.com/Guatcc/Guatcc.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.9c.6.1.8-.2.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    </div>
+  </header>
+
+  <main class="forum-shell">
+    <section class="forum-hero">
+      <div>
+        <p class="eyebrow">WebSocket Admin API</p>
+        <h1>论坛后台</h1>
+        <p class="lede">用管理员令牌连接论坛后端，导入/导出数据，管理帖子状态。</p>
+      </div>
+      <div class="forum-side">
+        <div class="forum-status" id="adminStatus" data-state="connecting">
+          <strong>等待连接</strong>
+          <span>ws.guat.cc:31679</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-grid">
+      <form class="admin-panel" id="adminLogin">
+        <h2>登录后台</h2>
+        <label>管理员令牌<input name="token" type="password" autocomplete="current-password" required placeholder="FORUM_ADMIN_TOKEN"></label>
+        <button class="primary-link" type="submit">连接后台</button>
+      </form>
+
+      <section class="admin-panel" id="adminActions" hidden>
+        <h2>数据操作</h2>
+        <div class="admin-actions">
+          <button class="secondary-link" id="exportForum" type="button">导出 JSON</button>
+          <button class="secondary-link" id="reloadAdmin" type="button">刷新列表</button>
+        </div>
+        <label>导入 JSON<textarea id="importJson" placeholder='{"threads":[...]}'></textarea></label>
+        <div class="admin-actions">
+          <button class="primary-link" id="importReplace" type="button">替换导入</button>
+          <button class="secondary-link" id="importMerge" type="button">合并导入</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="admin-panel" id="adminThreads" hidden>
+      <h2>帖子管理</h2>
+      <div class="thread-list admin-thread-list" id="adminThreadList"></div>
+    </section>
+  </main>
+
+  <script src="../js/app.js" defer></script>
+  <script src="../js/forum-ws.js" defer></script>
+  <script src="../js/forum-admin.js" defer></script>
+</body>
+</html>

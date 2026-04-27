@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "threads": [
+    {
+      "id": "t_demo_welcome",
+      "title": "欢迎来到 GUAT.CC 校园论坛",
+      "body": "这是一个示例帖子。启动 WebSocket 后端后，前端会自动显示论坛入口。",
+      "author": "站务",
+      "tags": ["公告", "新生"],
+      "pinned": true,
+      "locked": false,
+      "deleted": false,
+      "createdAt": "2026-04-22T00:00:00.000Z",
+      "updatedAt": "2026-04-22T00:00:00.000Z",
+      "replies": []
+    }
+  ]
+}
