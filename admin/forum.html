@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GUAT.CC 校园论坛 WebSocket 后台。">
+  <meta name="description" content="GUAT.CC 校园论坛 HTTP 后台入口。">
   <title>论坛后台 | GUAT.CC</title>
   <link rel="stylesheet" href="../css/guatcc.css">
 </head>
@@ -11,13 +11,13 @@
   <header class="site-header">
     <a class="brand" href="../index.html" aria-label="GUAT.CC 首页">
       <span class="brand-mark">
-        <img src="../logo-mark.png" alt="GUAT.CC logo">
+        <img src="../assets/logo-mark.png" alt="GUAT.CC logo">
       </span>
       <span><strong>GUAT.CC</strong><small>论坛后台</small></span>
     </a>
     <nav class="site-nav" aria-label="栏目导航">
       <a href="../index.html">首页</a>
-      <a class="forum-entry" href="../forum.html" hidden>论坛</a>
+      <a class="forum-entry" href="../forum.html">论坛</a>
       <a href="../admin/forum.html" aria-current="page">后台</a>
     </nav>
     <div class="header-tools">
@@ -31,48 +31,35 @@
 
   <main class="forum-shell">
     <section class="forum-hero">
-      <div>
-        <p class="eyebrow">WebSocket Admin API</p>
+      <div class="hero-copy">
+        <p class="eyebrow">HTTP Admin API</p>
         <h1>论坛后台</h1>
-        <p class="lede">用管理员令牌连接论坛后端，导入/导出数据，管理帖子状态。</p>
+        <p class="lede">论坛后台已经随 HTTP 后端独立运行。启动服务后访问后端的 <code>/admin</code>，即可管理帖子、导入导出和切换状态。</p>
       </div>
       <div class="forum-side">
-        <div class="forum-status" id="adminStatus" data-state="connecting">
-          <strong>等待连接</strong>
-          <span>ws.guat.cc:31679</span>
+        <div class="forum-status" data-state="online">
+          <strong>默认端口 31681</strong>
+          <span>node server/forum-server.js</span>
         </div>
       </div>
     </section>
 
     <section class="admin-grid">
-      <form class="admin-panel" id="adminLogin">
-        <h2>登录后台</h2>
-        <label>管理员令牌<input name="token" type="password" autocomplete="current-password" required placeholder="FORUM_ADMIN_TOKEN"></label>
-        <button class="primary-link" type="submit">连接后台</button>
-      </form>
-
-      <section class="admin-panel" id="adminActions" hidden>
-        <h2>数据操作</h2>
-        <div class="admin-actions">
-          <button class="secondary-link" id="exportForum" type="button">导出 JSON</button>
-          <button class="secondary-link" id="reloadAdmin" type="button">刷新列表</button>
-        </div>
-        <label>导入 JSON<textarea id="importJson" placeholder='{"threads":[...]}'></textarea></label>
-        <div class="admin-actions">
-          <button class="primary-link" id="importReplace" type="button">替换导入</button>
-          <button class="secondary-link" id="importMerge" type="button">合并导入</button>
-        </div>
-      </section>
-    </section>
-
-    <section class="admin-panel" id="adminThreads" hidden>
-      <h2>帖子管理</h2>
-      <div class="thread-list admin-thread-list" id="adminThreadList"></div>
+      <article class="admin-panel">
+        <h2>本地启动</h2>
+        <p class="panel-copy">PowerShell 中设置管理员令牌后启动 HTTP 服务。</p>
+        <pre><code>$env:FORUM_ADMIN_TOKEN="change-this-token"
+npm run forum:server</code></pre>
+      </article>
+      <article class="admin-panel">
+        <h2>后台入口</h2>
+        <p class="panel-copy">默认本地后台地址：</p>
+        <p><a class="primary-link" href="http://127.0.0.1:31681/admin" target="_blank" rel="noopener noreferrer">打开 HTTP 后台</a></p>
+        <p><a class="secondary-link" href="../ForumApi.md">查看 ForumApi.md</a></p>
+      </article>
     </section>
   </main>
 
   <script src="../js/app.js" defer></script>
-  <script src="../js/forum-ws.js" defer></script>
-  <script src="../js/forum-admin.js" defer></script>
 </body>
 </html>

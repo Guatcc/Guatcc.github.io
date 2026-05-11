@@ -3,120 +3,177 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="桂林航天工业学院新生问答索引，当前栏目：首页。">
-  <title>首页 | GUAT.CC</title>
+  <meta name="description" content="桂航百科，用更轻快的方式了解桂林航天工业学院。">
+  <title>桂航百科 | GUAT.CC</title>
   <link rel="stylesheet" href="css/guatcc.css">
 </head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="GUAT.CC 首页">
-      <span class="brand-mark">
-        <img src="logo-mark.png" alt="GUAT.CC logo">
-      </span>
-      <span><strong>GUAT.CC</strong><small>桂航快速解答</small></span>
+<body class="home-page" data-page="home">
+  <header class="home-header" id="homeHeader">
+    <a class="home-brand" href="index.html" aria-label="桂航百科首页">
+      <img src="assets/logo-mark.png" alt="桂航百科 logo">
+      <strong>桂航百科</strong>
     </a>
-    <nav class="site-nav" aria-label="栏目导航">
-      <a href="index.html" aria-current="page">首页</a><a href="s/quanxiao.html">全校</a><a href="s/wenjiangongxiang.html">文件</a><a href="s/sushe.html">宿舍</a><a href="s/junxun.html">军训</a><a href="s/wangluo.html">网络</a><a href="s/dianqi.html">电器</a><a class="forum-entry" href="forum.html" hidden>论坛</a>
+    <nav class="home-nav home-socials" aria-label="首页导航">
+      <a class="home-quick-link" href="s/quanxiao.html">桂航快速解答站</a>
+      <a class="home-social-link" href="https://github.com/Guatcc/Guatcc.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库" title="GitHub 仓库"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.9c.6.1.8-.2.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+      <a class="home-social-link" href="#" data-empty-link="抖音主页地址还没有填写" aria-disabled="true" aria-label="抖音主页" title="抖音主页地址还没有填写"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v10.2a4.4 4.4 0 1 1-4.4-4.4"/><path d="M14 6.2c1.3 2 3 3.1 5.2 3.2"/></svg></a>
+      <a class="home-social-link" href="#" data-empty-link="Bilibili 主页地址还没有填写" aria-disabled="true" aria-label="Bilibili 主页" title="Bilibili 主页地址还没有填写"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 2.2 2.4M16 4l-2.2 2.4"/><path d="M5.8 7.2h12.4a2.4 2.4 0 0 1 2.4 2.4v7.1a2.4 2.4 0 0 1-2.4 2.4H5.8a2.4 2.4 0 0 1-2.4-2.4V9.6a2.4 2.4 0 0 1 2.4-2.4Z"/><path d="M9 12.2v1.9m6-1.9v1.9"/></svg></a>
     </nav>
-    <div class="header-tools">
-      <label class="search-box" aria-label="搜索问题">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.7-4.7m2.2-5.3a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
-        <input id="searchInput" type="search" placeholder="搜索问题、答案或话题" autocomplete="off">
-      </label>
-      <button class="icon-button" id="themeToggle" type="button" aria-label="切换主题" aria-pressed="false">
-        <span class="theme-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.7-5.7 1.4-1.4M4.9 19.1l1.4-1.4m11.4 0 1.4 1.4M4.9 4.9l1.4 1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg></span>
-        <span class="theme-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 14.7A8.5 8.5 0 0 1 9.3 3.7 8.5 8.5 0 1 0 20.3 14.7Z"/></svg></span>
-      </button>
-      <a class="icon-button" href="https://github.com/Guatcc/Guatcc.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.9c.6.1.8-.2.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.2c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
-    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">桂林航天工业学院新生问答索引</p>
-        <h1>首页</h1>
-        <p class="lede">从群聊高频问题里整理出的快速答案，适合新生报到前后直接检索。</p>
-        <div class="hero-actions">
-          <a class="primary-link" href="s/quanxiao.html">查看全部问题</a>
-          <a class="secondary-link" href="s/wenjiangongxiang.html">文件共享</a>
-        </div>
+  <main class="home-story">
+    <section class="home-panel hero-panel" id="top" aria-label="桂航百科">
+      <div class="hero-pattern-stage" aria-hidden="true">
+        <div class="hero-orb hero-orb-a"></div>
+        <div class="hero-orb hero-orb-b"></div>
+        <div class="hero-ring hero-ring-a"></div>
+        <div class="hero-ring hero-ring-b"></div>
+        <div class="hero-chip hero-chip-a">宿舍</div>
+        <div class="hero-chip hero-chip-b">食堂</div>
+        <div class="hero-chip hero-chip-c">出行</div>
+        <div class="hero-chip hero-chip-d">论坛</div>
       </div>
-      <div class="hero-side">
-        <dl class="hero-metrics" aria-label="页面统计">
-          <div><dt>4</dt><dd>条问答</dd></div>
-          <div><dt>0</dt><dd>个话题</dd></div>
-          <div><dt>2026/04/27 18:25:41</dt><dd>生成时间</dd></div>
-        </dl>
+      <div class="home-hero-copy" data-home-reveal data-side="left">
+        <p>GUAT.CC 新生生活指南</p>
+        <h1>桂航百科</h1>
+        <span>从宿舍、食堂、出行到那些招生简章不会认真讲的小事。</span>
       </div>
     </section>
 
-    <section class="topic-strip" aria-label="热门话题">
-      <button class="topic-chip is-active" type="button" data-topic="">全部</button>
-      
+    <section class="home-panel guide-panel" id="guide">
+      <div class="orbit-stage" data-home-reveal data-side="right">
+        <div class="orbit-ring">
+          <span class="orbit-logo orbit-logo-1 brand-kfc"><strong>KFC</strong><small>肯德基</small></span>
+          <span class="orbit-logo orbit-logo-2 brand-tastien"><strong>TST</strong><small>塔斯汀</small></span>
+          <span class="orbit-logo orbit-logo-3 brand-guming"><strong>GM</strong><small>古茗</small></span>
+          <span class="orbit-logo orbit-logo-4 brand-yihetang"><strong>YHT</strong><small>益禾堂</small></span></div>
+        <h2>这才是招生简章</h2>
+        <p>不只讲专业和口号，也讲你报到后真正会遇到的生活半径。</p>
+      </div>
+      <div class="brand-river" aria-label="校外常见品牌">
+        
+          <article class="brand-card brand-kfc" data-home-reveal data-side="left">
+            <span>KFC</span>
+            <strong>肯德基</strong>
+            <p>红白快乐</p>
+          </article>
+          <article class="brand-card brand-tastien" data-home-reveal data-side="right">
+            <span>TST</span>
+            <strong>塔斯汀</strong>
+            <p>中国汉堡</p>
+          </article>
+          <article class="brand-card brand-guming" data-home-reveal data-side="left">
+            <span>GM</span>
+            <strong>古茗</strong>
+            <p>奶茶续航</p>
+          </article>
+          <article class="brand-card brand-yihetang" data-home-reveal data-side="right">
+            <span>YHT</span>
+            <strong>益禾堂</strong>
+            <p>冰饮回血</p>
+          </article>
+      </div>
     </section>
 
-    <section class="results-bar" aria-live="polite">
-      <span id="resultCount">4</span>
-      <span>条匹配结果</span>
+    <section class="home-panel food-panel" id="food">
+      <div class="marquee-food marquee-food-a" aria-hidden="true"><span class="food-card food-card-1">桂林米粉</span><span class="food-card food-card-2">烧腊饭</span><span class="food-card food-card-3">螺蛳粉</span><span class="food-card food-card-4">小炒窗口</span><span class="food-card food-card-1">麻辣香锅</span><span class="food-card food-card-2">糖水冰粉</span><span class="food-card food-card-3">早餐包点</span><span class="food-card food-card-4">自选快餐</span><span class="food-card food-card-1">桂林米粉</span><span class="food-card food-card-2">烧腊饭</span><span class="food-card food-card-3">螺蛳粉</span><span class="food-card food-card-4">小炒窗口</span><span class="food-card food-card-1">麻辣香锅</span><span class="food-card food-card-2">糖水冰粉</span><span class="food-card food-card-3">早餐包点</span><span class="food-card food-card-4">自选快餐</span></div>
+      <div class="marquee-food marquee-food-b" aria-hidden="true"><span class="food-card food-card-1">桂林米粉</span><span class="food-card food-card-2">烧腊饭</span><span class="food-card food-card-3">螺蛳粉</span><span class="food-card food-card-4">小炒窗口</span><span class="food-card food-card-1">麻辣香锅</span><span class="food-card food-card-2">糖水冰粉</span><span class="food-card food-card-3">早餐包点</span><span class="food-card food-card-4">自选快餐</span><span class="food-card food-card-1">桂林米粉</span><span class="food-card food-card-2">烧腊饭</span><span class="food-card food-card-3">螺蛳粉</span><span class="food-card food-card-4">小炒窗口</span><span class="food-card food-card-1">麻辣香锅</span><span class="food-card food-card-2">糖水冰粉</span><span class="food-card food-card-3">早餐包点</span><span class="food-card food-card-4">自选快餐</span></div>
+      <div class="giant-title" data-home-reveal data-side="left">
+        <h2>食</h2>
+        <p>南校区食堂、校外美食街、早餐和宵夜，把日常能量补满。</p>
+      </div>
     </section>
 
-    <section class="qa-list" id="qaList">
-      <article class="qa-card" data-card data-search="这是一个什么网站？ 这是桂林航天工业学院新生自己做的快速解答网站，数据来源于qq群聊天记录，你可以在本站快速找到你可能会问到的问题，以便快速得到答案。" data-topics="">
-        <div class="card-index">01</div>
-        <div class="card-content">
-          <h2 data-highlight>这是一个什么网站？</h2>
-          <div class="answer"><p data-highlight>这是桂林航天工业学院新生自己做的快速解答网站，数据来源于QQ群聊天记录，你可以在本站快速找到你可能会问到的问题，以便快速得到答案。</p></div>
-          
-          
-          
-        </div>
-      </article>
-<article class="qa-card" data-card data-search="所有问题 汇总整理放在这里啦 立即传送" data-topics="">
-        <div class="card-index">02</div>
-        <div class="card-content">
-          <h2 data-highlight>所有问题</h2>
-          <div class="answer"><p data-highlight>汇总整理放在这里啦</p></div>
-          
-          
-          <div class="card-actions"><a class="action-link" href="./s/quanxiao.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg><span>立即传送</span></a></div>
-        </div>
-      </article>
-<article class="qa-card" data-card data-search="文件共享 这里有你可能需要的文件 立即传送" data-topics="">
-        <div class="card-index">03</div>
-        <div class="card-content">
-          <h2 data-highlight>文件共享</h2>
-          <div class="answer"><p data-highlight>这里有你可能需要的文件</p></div>
-          
-          
-          <div class="card-actions"><a class="action-link" href="./s/wenjiangongxiang.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg><span>立即传送</span></a></div>
-        </div>
-      </article>
-<article class="qa-card" data-card data-search="你为什么做这个网站？ 目前是为爱发电，纯纯乐于助人，不挂广子。" data-topics="">
-        <div class="card-index">04</div>
-        <div class="card-content">
-          <h2 data-highlight>你为什么做这个网站？</h2>
-          <div class="answer"><p data-highlight>目前是为爱发电，纯纯乐于助人，不挂广子。</p></div>
-          
-          
-          
-        </div>
+    <section class="home-panel dorm-panel" id="dorm">
+      <div class="giant-title" data-home-reveal data-side="right">
+        <h2>住</h2>
+        <p>南校区多数上床下桌，北校区常见六到八人寝，空调基本都有。</p>
+      </div>
+      <div class="dorm-gallery">
+        <article class="dorm-card" data-home-reveal data-side="left">
+          <div class="dorm-visual dorm-six"></div>
+          <h3>上床下桌六人间</h3>
+          <p>学习区和睡眠区分离，床位报道时现场确认。</p>
+        </article>
+        <article class="dorm-card" data-home-reveal data-side="right">
+          <div class="dorm-visual dorm-eight"></div>
+          <h3>八仙桌八人间</h3>
+          <p>北校区更常见，上下铺加公共桌面，生活气息很足。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-panel traffic-panel" id="traffic">
+      <div class="giant-title" data-home-reveal data-side="left">
+        <h2>行</h2>
+      </div>
+      <article class="traffic-card" data-home-reveal data-side="right">
+        <h3>去市区没有想象中远</h3>
+        <ul class="check-list" id="trafficChecks">
+          <li>学校距离市区仅 10 公里</li>
+          <li>有公交车</li>
+          <li>坐车到市中心仅需 40 分钟</li>
+          <li>可以轻松打到出租车</li>
+          <li>和同学拼车更便宜</li>
+        </ul>
       </article>
     </section>
 
-    <p class="empty-state" id="emptyState" hidden>没有找到匹配内容，换个关键词试试。</p>
+    <section class="home-panel overview-panel" id="overview">
+      <div class="overview-head" data-home-reveal data-side="left">
+        <p>总览</p>
+        <h2>先记住这些，就不会太慌</h2>
+      </div>
+      <div class="overview-grid">
+        
+        <article class="overview-card" data-home-reveal data-side="left">
+          <span>01</span>
+          <h3>校区分布</h3>
+          <p>南北校区，跨校区走路约 10 分钟。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="right">
+          <span>02</span>
+          <h3>宿舍限电</h3>
+          <p>1500W 左右，持续发热电器不可用，吹风筒可用但注意功率。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="left">
+          <span>03</span>
+          <h3>宿舍网速</h3>
+          <p>标准 10Mbps，付费宽带峰值可到 500Mbps。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="right">
+          <span>04</span>
+          <h3>禁烟政策</h3>
+          <p>学校不干涉吸烟自由，但宿舍和禁烟场合不能吸烟。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="left">
+          <span>05</span>
+          <h3>外卖</h3>
+          <p>校外店可放宿舍楼下，校内食堂配送一般放餐车处。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="right">
+          <span>06</span>
+          <h3>校门出入</h3>
+          <p>没课可刷脸出入，门禁和夜间出入按学校要求执行。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="left">
+          <span>07</span>
+          <h3>宿舍安排</h3>
+          <p>报道当天知道宿舍，现场选床位，不建议提前到校占床。</p>
+        </article>
+        <article class="overview-card" data-home-reveal data-side="right">
+          <span>08</span>
+          <h3>生活配套</h3>
+          <p>校外美食街近，快递站、便利店、银行取款点基本够用。</p>
+        </article>
+      </div>
+      <div class="home-cta" data-home-reveal data-side="right">
+        <a class="primary-link" href="s/quanxiao.html">进入桂航快速解答站</a>
+        <a class="secondary-link" href="forum.html">看看校园论坛</a>
+      </div>
+    </section>
   </main>
 
-  <button class="back-top" id="backTop" type="button" aria-label="回到顶部"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></button>
-
-  <footer class="site-footer">
-    <span>&copy; 2026 GUAT.CC</span>
-    <a href="index.html">首页</a>
-    <a href="https://github.com/Guatcc/Guatcc.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </footer>
-
-  <script src="js/app.js" defer></script>
-  <script src="js/forum-ws.js" defer></script>
-  <script src="js/forum-bridge.js" defer></script>
+  <script src="js/home.js" defer></script>
 </body>
 </html>
